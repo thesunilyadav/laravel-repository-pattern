@@ -33,7 +33,13 @@ class UserRepository implements UserRepositoryInterface
 
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $request->validate([
+            "name"    => "required|regex:/^[\pL\s\-]+$/u",
+            "email"   => "required|email",
+            "country" => "required|regex:/^[\pL\s\-]+$/u"
+        ]);
+        User::find($id)->update($request->all());
+        return redirect()->route("users.index");
     }
 
     public function destroy($id){

@@ -14,7 +14,7 @@
                         </ul>
                     </div><br />
                 @endif
-                <form method="put" action="{{route("users.update", $user)}}"
+                <form method="PUT" action="/users/update/{{$user->id}}">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name:</label>
@@ -29,7 +29,7 @@
                         <label for="country">Country :</label>
                         <input type="text" class="form-control" value="{{$user->country}}" name="country"/>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                     <a href="{{url()->previous()}}" class="btn btn-warning">Go back</a>
                 </form>
             </div>

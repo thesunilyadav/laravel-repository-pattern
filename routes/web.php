@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('users/update/{id}',[\App\Http\Controllers\UserController::class,'update']);
 Route::resource("users",\App\Http\Controllers\UserController::class);
