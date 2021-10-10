@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public $userRepo;
 
-    function __counstruct(UserRepositoryInterface $userRepo){
+    function __construct(UserRepositoryInterface $userRepo){
         $this->userRepo = $userRepo;
     }
     /**
@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("user.index",["users"=>User::all()]);
+        return $this->userRepo->index();
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("user.create");
+        return $this->userRepo->create();
     }
 
     /**
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->userRepo->store($request);
     }
 
     /**
@@ -63,7 +63,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $this->userRepo->edit($id);
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->userRepo->update($request,$id);
     }
 
     /**
@@ -86,6 +86,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->userRepo->destroy($id);
     }
 }

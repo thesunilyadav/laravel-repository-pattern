@@ -3,7 +3,7 @@
 @section('main')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-5 text-center">Add a user</h1>
+            <h1 class="display-5 text-center">Update a user</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -14,20 +14,20 @@
                         </ul>
                     </div><br />
                 @endif
-                <form method="post" action="{{ route('users.store') }}">
+                <form method="put" action="{{route("users.update", $user)}}"
                     @csrf
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" value="{{old('name')}}" name="name"/>
+                        <input type="text" class="form-control" value="{{$user->name}}" name="name"/>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="text" class="form-control" value="{{old('email')}}" name="email"/>
+                        <input type="text" class="form-control" value="{{$user->email}}" name="email"/>
                     </div>
                     <div class="form-group">
                         <label for="country">Country :</label>
-                        <input type="text" class="form-control" value="{{old('country')}}" name="country"/>
+                        <input type="text" class="form-control" value="{{$user->country}}" name="country"/>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                     <a href="{{url()->previous()}}" class="btn btn-warning">Go back</a>
