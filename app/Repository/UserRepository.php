@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
+
+    /**
+     *  Repositories are classes or components that encapsulate the logic required to access data sources.
+     * this will process the request and return the data only and not the view
+     */
     public function index()
     {
-        return view("user.index",["users"=>User::all()]);
+
+        // dont try to  all data at a time. try to use pagination or datable
+        return User::paginate(10);
+//        return view("user.index",["users"=>User::all()]);
     }
 
     public function create()
@@ -17,33 +25,25 @@ class UserRepository implements UserRepositoryInterface
         return view("user.create");
     }
 
-    public function store(Request $request){
-        $request->validate([
-            "name"    => "required|regex:/^[\pL\s\-]+$/u",
-            "email"   => "required|email",
-            "country" => "required|regex:/^[\pL\s\-]+$/u"
-        ]);
-        User::create($request->all());
-        return redirect()->route("users.index");
+    public function store($request){
+
+     return User::create($request->all());
+//        return redirect()->route("users.index");
     }
 
     public function edit($id){
-        return view('user.edit',["user"=>User::find($id)]);
+        return User::find($id);
+//        return view('user.edit',["user"=>]);
     }
 
-    public function update(Request $request, $id)
+    public function update($request, $id)
     {
-        $request->validate([
-            "name"    => "required|regex:/^[\pL\s\-]+$/u",
-            "email"   => "required|email",
-            "country" => "required|regex:/^[\pL\s\-]+$/u"
-        ]);
-        User::find($id)->update($request->all());
-        return redirect()->route("users.index");
+        return User::find($id)->update($request->except('token'));
+//        return redirect()->route("users.index");
     }
 
     public function destroy($id){
-        User::find($id)->delete();
-        return redirect()->route("users.index");
+        return User::find($id)->delete();
+//        return redirect()->route("users.index");
     }
 }

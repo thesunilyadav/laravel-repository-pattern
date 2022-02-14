@@ -73,8 +73,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(UserValidationRequest $request,$id)
     {
+        //userValidationRequest will validate the request
         return $this->userRepo->update($request,$id);
     }
 
@@ -86,6 +87,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        //always return view or response or try catch block at controller level
+        // repostory is responsible for ur query
         return $this->userRepo->destroy($id);
     }
 }
